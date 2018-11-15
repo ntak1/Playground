@@ -1,0 +1,10 @@
+IPYTHON TUTORIAL: KERNELS
+
+LIST THE KERNELS:
+jupyter kernelspec list
+
+HOW TO CREATE A NEW KERNEL
+python -m ipykernel install --user
+
+HOW TO DELETE A KERNEL
+jupyter kernelspec remove ir

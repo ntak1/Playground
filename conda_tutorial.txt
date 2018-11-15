@@ -1,0 +1,24 @@
+CREATE A NEW ENV
+conda create --name name python=3.6
+
+CREATE AN ENV WITH A YML FILE
+conda env create -f environment.yml
+
+RENAME AN ENV
+conda create --name new_name --clone old_name
+conda remove --name old_name --all
+
+LIST THE ENVS
+conda info --envs
+
+VIEW THE LIST OF PACKAGES IN AN ENVIRONMENT
+conda list -n myenv
+
+EXPORTING THE ENV FILE
+    1. source activate env
+    2. conda env export > environment.yml
+    3. just share the env
+
+REMOVING AN ENVIRONMENT
+conda remove --name myenv --all
+
