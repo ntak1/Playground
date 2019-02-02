@@ -34,4 +34,20 @@ PID=`pgrep firefox`
 # The | is used when we want to use the output of a command as the input to
 # the following.
 # tr is used to make substitutions, in this case the \0 to \n
-cat /proc/$PID/environ | tr '\0' '\n'
+#cat /proc/$PID/environ | tr '\0' '\n'
+
+# FINDING THE LENGTH OF A STRING
+lenght=${#name}
+echo "The lenght of the variable Name is: %d", $lenght
+
+# CHECKING FOR SUPERUSER
+if [ $UID -ne 0 ]; then
+    echo "Non root user"
+else
+    echo "Root user"
+fi
+
+# DOING MATH
+var=1
+let var++
+echo $var

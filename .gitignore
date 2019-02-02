@@ -1,4 +1,8 @@
 # Ignore the checkpoints
 **/.ipynb_checkpoints
 # Ignore swap files
-/*~ 
+*~ 
+
+scripts/__pycache__/
+scripts/avogado6/
+
