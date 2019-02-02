@@ -1,0 +1,4 @@
+# Ignore the checkpoints
+**/.ipynb_checkpoints
+# Ignore swap files
+/*~ 
