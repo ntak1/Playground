@@ -186,6 +186,10 @@ dependencies:
     - dask==0.19.1
     - isodate==0.6.0
     - rdflib==4.2.2
+    - scikit-learn==0.20.0
+    - sklearn==0.0
     - sparqlkernel==1.2.0
+    - torch==0.4.1
+    - torchvision==0.2.1
 prefix: /home/ntkm/miniconda3/envs/env3
 
