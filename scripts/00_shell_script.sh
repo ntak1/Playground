@@ -48,6 +48,18 @@ else
 fi
 
 # DOING MATH
+## Using let
 var=1
 let var++
 echo $var
+
+## Alternatively
+var=1
+var=$[var +1]
+var=1
+echo $var
+var=$(( var++ ))
+echo $var
+
+# Working with float point numbers
+echo "4 * 0.56" | bc
