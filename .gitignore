@@ -4,7 +4,9 @@
 *~
 *.swp
 *.swo
-
+# Ignore object files
+*.o
+# Other project specifics
 scripts/__pycache__/
 scripts/avogado6/
 **.jpg
