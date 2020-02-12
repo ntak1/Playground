@@ -14,7 +14,7 @@ using namespace std;
 #include<string>
 
 #define LOWER 0
-#define UPPER 19
+#define UPPER 23
 #define MAX_SIZE 1000
 #define SUB 97
 
@@ -50,7 +50,21 @@ int main(){
     unsigned long int deciphertext[MAX_SIZE];
 
     // Input data
+    cout << "Input a string containing only lower case letters:"<< endl;
     getline(cin, plaintext);
+    try{
+        bool valid_input = true;
+        for(int i = 0; i < plaintext.size(); i++){
+            if(plaintext[i]<(int)'a' | plaintext[i] > (int)'z'){
+                valid_input = false;
+                throw valid_input;
+                break;
+            }
+        }
+    }catch(bool valid_input){
+        cout << "Invalid input - use only lower cases." << endl;
+        return -1;
+    }
 
     // Sanity Check
     cout << "p = " << p << ", q = " << q << endl;
