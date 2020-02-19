@@ -12,6 +12,8 @@ set autoindent
 "FIX BUGGED BACKSPACE"
 set backspace=indent,eol,start
 
+"MISC"
+set paste
 set backup
 set nocompatible
 
