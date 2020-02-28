@@ -28,4 +28,6 @@ On command mode type:
 ```vim
 u
 ```
-
+## Python jedi
+Instructions to install Python Jedi  
+https://stackoverflow.com/questions/21628743/cant-get-the-jedi-vim-plugin-to-work
