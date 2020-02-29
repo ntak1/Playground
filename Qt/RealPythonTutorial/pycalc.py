@@ -96,18 +96,27 @@ class PyCalcUi(QMainWindow):
 
     def clearDisplay(self):
         """Clear the display."""
-        self.setDisplay("")
+        self.setDisplayText("")
 
 # Create a Controller class to connect th GUI and the model
 class PyCalcCtrl:
-    """PyCalc Controller Class."""
-    def __init__(self,view):
+    """PyCalc Controller Class. Connect view and model"""
+    def __init__(self,model,view):
+        self._evaluate = model
         self._view = view
         # Conect signal and slots
         self._connectSignals()
+
+    def _calculateResult(self):
+        """Evaluate and display the result of the current expression"""
+        result = self._evaluate(expression=self._view.displayText())
+        self._view.setDisplayText(result)
     
     def _buildExpression(self, sub_exp):
         """Build expression."""
+        if self._view.displayText == ERROR_MSG:
+            self._view.clearDisplay()
+        # Concatenate current + new text
         expression = self._view.displayText() + sub_exp
         self._view.setDisplayText(expression)
 
@@ -116,13 +125,14 @@ class PyCalcCtrl:
         for btnText, btn in self._view.buttons.items():
             if btnText not in {'=', 'C'}:
                 btn.clicked.connect(partial(self._buildExpression, btnText))
+        self._view.buttons['='].clicked.connect(self._calculateResult)
+        self._view.display.returnPressed.connect(self._calculateResult)
         self._view.buttons['C'].clicked.connect(self._view.clearDisplay)
         
 def evaluateExpression(expression):
     """Evaluate an expression"""
     try:
         result = str(eval(expression,{},{})) # {} {} what for?w
-
     except:
         result = ERROR_MSG
     return result
@@ -136,7 +146,8 @@ def main():
     view = PyCalcUi()
     view.show()
     # Create instances of the model and the controller
-    PyCalcCtrl(view=view)
+    model = evaluateExpression
+    PyCalcCtrl(model=model,view=view)
     # Execute the calculator's main loop
     sys.exit(pycalc.exec_())
 
