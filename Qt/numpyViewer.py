@@ -37,6 +37,7 @@ class WidgetPlot(QWidget):
         self.setParent(parent)
         self.setLayout(QVBoxLayout())
         self.canvas =  MyMplCanvas(parent=self)
+        self.plotColor = 'seismic'
         self.toolbar = NavigationToolbar(self.canvas, self)
         self.layout().addWidget(self.toolbar)
         self.layout().addWidget(self.canvas)
@@ -75,13 +76,16 @@ class Window(QMainWindow):
         if len(data.shape) == 1:
             self.plot.canvas.axes.plot(data)
         elif len(data.shape) == 2:
-            self.plot.canvas.axes.imshow(data)        
-            
+            self.plot.canvas.axes.imshow(data,cmap=self.plot.plotColor)        
+        self.plot.canvas.draw()
+
+    def clearPlot(self):
+        self.plot.canvas.axes.cla()
         self.plot.canvas.draw()
         
 
 class ApplicationController():
-    def __init__(self,model,view):
+    def __init__(self,view):
         self._view = view
         self._model = model
         self._connectSignals()
@@ -91,22 +95,19 @@ class ApplicationController():
         try:
             data = np.load(fileName)
         except:
-            print("Errror loading the file {}".format(fileName))
+            print("Error loading the file {}".format(fileName))
             return
         self._view.updatePlot(data)
             
     def _connectSignals(self):
         self._view.menu.addAction("Open New",self.openNumpyFile)
+        self._view.menu.addAction("Clear",self._view.clearPlot)
         self._view.menu.addAction("Exit",self._view.close)
-
-def plus():
-    return 1+2
 
 def main():
     app = QApplication(sys.argv) 
     view = Window()
-    model = plus
-    appCtrl = ApplicationController(model, view)
+    appCtrl = ApplicationController(view)
     view.show()
     sys.exit(app.exec())
 
