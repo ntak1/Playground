@@ -3,7 +3,6 @@ $(function () {
     let previous = undefined;
 
     function onTarefaDeleteClick() {
-        console.log("Good bye!");
         console.log($(this).parent(".tarefa-item").text().trim());
         $(this).parent(".tarefa-item").hide("slow", () => $(this).remove());
     }
@@ -14,29 +13,28 @@ $(function () {
         const presseed_enter = event.which === 13;
         if (presseed_enter) {
             console.log("keydown", this)
-            const text = $(".tarefa-edit").val();
+            const text = $(".tarefa-edit").val()?.trim();
             $(".tarefa-edit").remove();
-            var txt2 = $("<div></div>").text(text === undefined ? "" : text).addClass("tarefa-texto"); 
-            $(lastClicked).append(previous);
-            $("tarefa-texto").text(txt2);
+            $(lastClicked).parent(".tarefa-item").prepend(previous);
+            $(this).text(text);
             lastClicked = undefined;
         }
     }
 
-    function onTarefaItemClick() {
-        console.log("Here we will edit the item", this);
+    function onTarefaTextoClick() {
+        console.log("Here we will edit the item");
         // In case we should continue the input treatment
         if (!$(this).is($(lastClicked))) {
             // Prepare the input to have the old text
-            if(lastClicked === undefined) {
-                const text = $(this).children(".tarefa-texto").text();
-                previous = $(this).children();
+            if (lastClicked === undefined) {
+                const text = $(this).text().trim();
+                previous = $(this);
                 const content = `<input type="text" class="tarefa-edit" value="${text}" >`;
                 $(this).html(content).keydown(onTarefaEditKeydown);
                 lastClicked = this;
             }
         }
     }
-    $(".tarefa-item").click(onTarefaItemClick);
+    $(".tarefa-texto").click(onTarefaTextoClick);
 
 });
