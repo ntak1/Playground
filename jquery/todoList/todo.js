@@ -10,8 +10,8 @@ $(function () {
 
 
     function onTarefaEditKeydown(event) {
-        const presseed_enter = event.which === 13;
-        if (presseed_enter) {
+        const presseedEnter = event.which === 13;
+        if (presseedEnter) {
             console.log("keydown", this)
             const text = $(".tarefa-edit").val()?.trim();
             $(".tarefa-edit").remove();
@@ -21,7 +21,7 @@ $(function () {
         }
     }
 
-    function onTarefaTextoClick() {
+    function onTarefaTextClick() {
         console.log("Here we will edit the item");
         // In case we should continue the input treatment
         if (!$(this).is($(lastClicked))) {
@@ -35,6 +35,29 @@ $(function () {
             }
         }
     }
-    $(".tarefa-texto").click(onTarefaTextoClick);
+    $(".tarefa-texto").click(onTarefaTextClick);
+
+    function addTarefa(text) {
+        let $tarefa = $("<div \>").addClass("tarefa-item")
+            .append($("<div />").addClass("tarefa-texto").text(text))
+            .append($("<div />").addClass("tarefa-delete").text("delete"))
+            .append($("<div />").addClass("clear").text("clear"));
+        console.log($tarefa);
+        $("#tarefa-lista").append($tarefa);
+        $(".tarefa-delete").click(onTarefaDeleteClick)
+        $(".tarefa-texto").click(onTarefaTextClick)
+    }
+
+    function onTextKeydown(event) {
+        const presseedEnter = event.which === 13;
+        console.log(presseedEnter)
+        if (presseedEnter) {
+            const text = $("#tarefa").val();
+            console.log("Add text", text);
+            addTarefa(text);
+            $("#tarefa").val("");
+        }
+    }
+    $("#tarefa").on("keydown.enter", onTextKeydown);
 
 });

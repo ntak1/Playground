@@ -29,3 +29,7 @@ $("#tarefa").on("keydown.segundo", function () {
 
 // Disable only one of the events
 $("#tarefa").off("keydown.primeiro");
+
+
+// Disable to other event
+$("#tarefa").off("keydown.second");
