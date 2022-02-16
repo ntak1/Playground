@@ -1,5 +1,7 @@
 # Ignore the checkpoints
 **/.ipynb_checkpoints
+**/venv
+**/.idea
 # Ignore swap files
 *~
 *.swp
